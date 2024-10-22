@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class SchoolHomePage extends StatefulWidget {
+class HomePage extends StatefulWidget {
   @override
   _SchoolHomePageState createState() => _SchoolHomePageState();
 }
 
-class _SchoolHomePageState extends State<SchoolHomePage> {
+class _SchoolHomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
   // List of widgets to be displayed for each page
@@ -31,7 +31,10 @@ class _SchoolHomePageState extends State<SchoolHomePage> {
       bottomNavigationBar: Container(
         // color: Colors.yellow,
         height: 50,
-        decoration: BoxDecoration(color: Colors.yellow.shade700, borderRadius: BorderRadius.only(topLeft:Radius.circular(25) ,topRight:Radius.circular(25))),
+        decoration: BoxDecoration(
+            color: Colors.yellow.shade700,
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(25), topRight: Radius.circular(25))),
       ),
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -88,7 +91,7 @@ class _SchoolHomePageState extends State<SchoolHomePage> {
                     Text(
                       'Manipal International School',
                       style:
-                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                      TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 5),
                     Text(
@@ -149,17 +152,18 @@ class _SchoolHomePageState extends State<SchoolHomePage> {
               ),
             ),
 
-
             // 1. Profile Container
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.only(
+                  top: 35.0, left: 16, right: 16, bottom: 16),
               child: buildProfileContainer(),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 1),
 
             // 2. Bus Information Container
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.only(
+                  top: 0.0, bottom: 16, left: 16, right: 16),
               child: buildBusInfoContainer(),
             ),
             SizedBox(height: 20),
@@ -176,112 +180,291 @@ class _SchoolHomePageState extends State<SchoolHomePage> {
               padding: const EdgeInsets.all(16.0),
               child: buildTrackLiveButtonContainer(),
             ),
-
-
-
-
           ],
         ),
       ),
     );
   }
 
-
-
-
-
-
-
-
   //methods for different cards student bus etc
 
   // 1. Profile Container
   Widget buildProfileContainer() {
     return Container(
-      padding: EdgeInsets.all(16),
+      height: 189,
+      padding: EdgeInsets.only(left: 13, right: 16, bottom: 10, top: 9),
       decoration: BoxDecoration(
-        color: Color(0xFFf5c25b),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.32),
+            spreadRadius: 5,
+            blurRadius: 20,
+            offset: Offset(0, 3), // changes position of shadow
+          )
+        ],
+        image: DecorationImage(
+            image: AssetImage("images/bgg1.png"), fit: BoxFit.cover),
         borderRadius: BorderRadius.circular(15),
       ),
-      child: Row(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          CircleAvatar(
-            radius: 40,
-            backgroundImage: NetworkImage('https://via.placeholder.com/150'), // Placeholder for profile image
-          ),
-          SizedBox(width: 20),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          Row(
             children: [
-              Text(
-                'Ridhwan Vp Shameem',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              CircleAvatar(
+                backgroundColor: Colors.white,
+                radius: 40,
+                backgroundImage: AssetImage(
+                    'images/stuimage.png'), // Placeholder for profile image
               ),
-              SizedBox(height: 10),
-              Text('Age : 15 years'),
-              Text('Class : VIII B'),
+              SizedBox(width: 26),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Ridhwan Vp Shameem',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
+                  ),
+                  SizedBox(height: 5),
+                  Row(
+                    children: [
+                      Text.rich(TextSpan(children: <TextSpan>[
+                        TextSpan(
+                            text: "Age:",
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        TextSpan(
+                            text: " 15 years",
+                            style: TextStyle(fontWeight: FontWeight.normal))
+                      ])),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      Text.rich(TextSpan(children: <TextSpan>[
+                        TextSpan(
+                            text: "Class:",
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        TextSpan(
+                            text: " VIII B",
+                            style: TextStyle(fontWeight: FontWeight.normal))
+                      ])),
+                    ],
+                  )
+                ],
+              ),
             ],
           ),
+          SizedBox(height: 10),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height: 80,
+                width: 100,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage("images/img1.png"),
+                        fit: BoxFit.fill)),
+              ),
+              SizedBox(width: 8),
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text.rich(TextSpan(children: <TextSpan>[
+                      TextSpan(
+                          text: "Bus No:",
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                      TextSpan(
+                          text: " DL1024BC",
+                          style: TextStyle(fontWeight: FontWeight.normal))
+                    ])),
+                    SizedBox(height: 5),
+                    Text.rich(TextSpan(children: <TextSpan>[
+                      TextSpan(
+                          text: "Boarding:",
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                      TextSpan(
+                          text: " 9:00 am",
+                          style: TextStyle(fontWeight: FontWeight.normal)),
+                      TextSpan(
+                          text: " \nTime",
+                          style: TextStyle(fontWeight: FontWeight.bold))
+                    ])),
+                  ],
+                ),
+              ),
+              SizedBox(width: 25),
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: Text.rich(TextSpan(children: <TextSpan>[
+                  TextSpan(
+                      text: "Status:",
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  TextSpan(
+                      text: "\nOn Board",
+                      style: TextStyle(fontWeight: FontWeight.normal))
+                ])),
+              ),
+            ],
+          )
         ],
       ),
     );
   }
 
+
+
+
+
+
+
+
+
   // 2. Bus Information Container
   Widget buildBusInfoContainer() {
-    return Column(
-      children: [
-        // First Bus Info
-        Container(
-          padding: EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: Color(0xFFf0ad00),
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: Row(
-            children: [
-              Image.asset('assets/bus.png', height: 50, width: 50), // Replace with your asset
-              SizedBox(width: 20),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Bus No: DL1024BC'),
-                  Text('Boarding: 9:00 am'),
-                  Text('Status: On Board'),
-                ],
-              ),
-            ],
-          ),
+    return Container(
+        height: 205,
+        padding: EdgeInsets.only(left: 8, right: 16, bottom: 10, top: 12),
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.32),
+              spreadRadius: 5,
+              blurRadius: 20,
+              offset: Offset(0, 3), // changes position of shadow
+            )
+          ],
+          image: DecorationImage(
+              image: AssetImage("images/bggg2.png"), fit: BoxFit.cover),
+          borderRadius: BorderRadius.circular(15),
         ),
-        SizedBox(height: 20),
+        child: Row(children: [
+          Container(
+            height: 150,
+            width: 120,
+            padding: EdgeInsets.only(left: 13, right: 16, bottom: 10, top: 9),
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("images/bus1.png"),
+                  fit: BoxFit.fill),
+              borderRadius: BorderRadius.circular(50),
+            ),
+          ),
+          SizedBox(width: 8),
 
-        // Second Bus Info (Driver & Conductor details)
-        Container(
-          padding: EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: Color(0xFFf0ad00),
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: Row(
+
+          const Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset('assets/driver_bus.png', height: 50, width: 50), // Replace with your asset
-              SizedBox(width: 20),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Driver\'s Name: Ahmed Shah'),
-                  Text('Conductor\'s Name: Sachi Parsekar'),
-                  Text('Bus No: DL1024BC'),
-                  Text('Contact: 9064649457'),
-                  Text('Status: Running'),
-                ],
+              Padding(
+                padding: EdgeInsets.only(top: 4.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text.rich(TextSpan(children: <TextSpan>[
+                      TextSpan(
+                          text: "Driver’s Name :",
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                      TextSpan(
+                          text: " \nAhmed Shah",
+                          style: TextStyle(fontWeight: FontWeight.normal))
+                    ])),
+                    SizedBox(height: 4),
+                    Text.rich(TextSpan(children: <TextSpan>[
+                      TextSpan(
+                          text: "Conductor’s Name:",
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                      TextSpan(
+                          text: "\nSachi Parsekar",
+                          style: TextStyle(fontWeight: FontWeight.normal))
+                    ])),
+                  ],
+                ),
+
               ),
+
+
+              SizedBox(height: 10),
+
+
+              Row(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text.rich(TextSpan(children: <TextSpan>[
+                        TextSpan(
+                            text: "Bus No :",
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        TextSpan(
+                            text: " \nDL1024BC",
+                            style: TextStyle(fontWeight: FontWeight.normal))
+                      ])),
+                      SizedBox(height: 5),
+                      Text.rich(TextSpan(children: <TextSpan>[
+                        TextSpan(
+                            text: "Boarding Time :",
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        TextSpan(
+                            text: " \n9:00 Am ",
+                            style: TextStyle(fontWeight: FontWeight.normal))
+                      ])),
+                    ],
+                  ),
+
+                  SizedBox(width: 15),
+
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text.rich(TextSpan(children: <TextSpan>[
+                        TextSpan(
+                            text: "Status : ",
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        TextSpan(
+                            text: " \nRunning",
+                            style: TextStyle(fontWeight: FontWeight.normal))
+                      ])),
+                      SizedBox(height: 5),
+                      Text.rich(TextSpan(children: <TextSpan>[
+                        TextSpan(
+                            text: "Contact No.:",
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        TextSpan(
+                            text: " \n906449457 ",
+                            style: TextStyle(fontWeight: FontWeight.normal))
+                      ])),
+                    ],
+
+                  ),
+                ],
+              )
             ],
-          ),
-        ),
-      ],
-    );
+          )
+        ]));
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   // 3. Route Progress Container
   Widget buildRouteProgressContainer() {
@@ -293,7 +476,6 @@ class _SchoolHomePageState extends State<SchoolHomePage> {
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 10),
-
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -321,13 +503,13 @@ class _SchoolHomePageState extends State<SchoolHomePage> {
   // 4. Track Live Button Container
   Widget buildTrackLiveButtonContainer() {
     return Container(
-      width: double.infinity,
       height: 50,
       child: ElevatedButton(
         onPressed: () {},
         style: ElevatedButton.styleFrom(
           backgroundColor: Color(0xFFf0a500),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+          shape:
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
         ),
         child: Text(
           'TRACK LIVE',
@@ -338,50 +520,51 @@ class _SchoolHomePageState extends State<SchoolHomePage> {
   }
 }
 
+// Helper method to build stat cards
 Widget _buildStatCard(String title, String value) {
-    return Card(
-      color: Colors.white,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      elevation: 4,
-      child: Container(
-        width: 170,
-        padding: EdgeInsets.all(16),
-        child: Column(
-          children: [
-            Text(value,
-                style: TextStyle(
-                    fontSize: 48,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: "Times New roman")),
-            SizedBox(height: 5),
-            Text(title,
-                style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold)),
-          ],
-        ),
-      ),
-    );
-  }
-
-  // Helper method to build announcement cards
-  Widget _buildAnnouncementCard(String attention, String message, Color color) {
-    return Container(
-      padding: EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
-        border: Border(left: BorderSide(color: color, width: 5)),
-        borderRadius: BorderRadius.circular(10),
-      ),
+  return Card(
+    color: Colors.white,
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+    elevation: 4,
+    child: Container(
+      width: 170,
+      padding: EdgeInsets.all(16),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(attention,
-              style: TextStyle(color: color, fontWeight: FontWeight.bold)),
+          Text(value,
+              style: TextStyle(
+                  fontSize: 48,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: "Times New roman")),
           SizedBox(height: 5),
-          Text(message),
+          Text(title,
+              style: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold)),
         ],
       ),
-    );
-  }
+    ),
+  );
+}
+
+// Helper method to build announcement cards
+Widget _buildAnnouncementCard(String attention, String message, Color color) {
+  return Container(
+    padding: EdgeInsets.all(12),
+    decoration: BoxDecoration(
+      color: color.withOpacity(0.1),
+      border: Border(left: BorderSide(color: color, width: 5)),
+      borderRadius: BorderRadius.circular(10),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(attention,
+            style: TextStyle(color: color, fontWeight: FontWeight.bold)),
+        SizedBox(height: 5),
+        Text(message),
+      ],
+    ),
+  );
+}
