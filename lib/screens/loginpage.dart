@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'homepage.dart'; // Import the SchoolHomePage component
+import 'signuppage.dart'; // Import the SignUp component
 
 class LoginPage extends StatelessWidget {
   @override
@@ -13,19 +15,22 @@ class LoginPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Row for the back arrow and sign-up text
+              // Row for the back arrow and sign-in text
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     IconButton(
                       icon: Icon(Icons.arrow_back),
-                      onPressed: () {},
+                      onPressed: () {
+                        // Define action on back arrow press
+                      },
                       color: Colors.black,
                     ),
+                    SizedBox(width: 8), // Space between the arrow and the text
                     Text(
-                      'Sign Up',
+                      'Sign In',
                       style: TextStyle(
                         fontSize: 24, // Bigger font size
                         fontWeight: FontWeight.bold, // Bold text
@@ -52,7 +57,6 @@ class LoginPage extends StatelessWidget {
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-
                   children: [
                     Text(
                       'Welcome to Skoolyatra,',
@@ -116,8 +120,8 @@ class LoginPage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20.0),
                           ),
                         ),
-                        onPressed: () {
-                          // On pressing Sign in, navigate to the SchoolHomePage
+                        onPressed: () 
+                        {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -144,6 +148,15 @@ class LoginPage extends StatelessWidget {
                                 color: Colors.purple,
                                 decoration: TextDecoration.underline,
                               ),
+                              recognizer: TapGestureRecognizer()..onTap = () {
+                                // Navigate to Sign Up page
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => SignUp(), // Ensure SignUp is defined in signup.dart
+                                  ),
+                                );
+                              },
                             ),
                           ],
                         ),
