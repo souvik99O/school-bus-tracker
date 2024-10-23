@@ -2,6 +2,8 @@
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled/screens/conductorpage.dart';
+import 'package:untitled/screens/homepage.dart';
 import 'package:untitled/screens/loginpage.dart';
 
 class SignUp extends StatefulWidget {
@@ -242,7 +244,19 @@ class _SignUpState extends State<SignUp> {
                           ),
                         ),
                         onPressed: () {
-                          // Perform sign-up logic here
+                          if (isParentSelected) {
+                            // Navigate to HomePage for Parent
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => HomePage()),
+                            );
+                          } else {
+                            // Navigate to ConductorPage for School
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => ConductorPage()),
+                            );
+                          }
                         },
                         child: Text(
                           'Sign Up',
