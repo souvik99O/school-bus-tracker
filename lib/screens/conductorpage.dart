@@ -49,7 +49,7 @@ class _ConductorPageState extends State<ConductorPage> {
         backgroundColor: Colors.yellow,
         title: Row(
           children: [
-            Image.asset('images/company_logo.png', height: 40),
+            Image.asset('assets/images/company_logo.png', height: 40),
             Text(" SchoolYatra", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
             Spacer(),
             TextButton(

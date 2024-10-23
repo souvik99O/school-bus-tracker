@@ -90,7 +90,7 @@ class _SignUpState extends State<SignUp> {
                     SizedBox(height: 20),
                     Center(
                       child: Image.asset(
-                        'images/bus.png',
+                        'assets/images/bus.png',
                         height: 150,
                       ),
                     ),

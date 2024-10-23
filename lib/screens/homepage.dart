@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:untitled/screens/trackingpage.dart';
+
+import 'accountpage.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   _SchoolHomePageState createState() => _SchoolHomePageState();
 }
@@ -8,38 +13,125 @@ class HomePage extends StatefulWidget {
 class _SchoolHomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
-  // List of widgets to be displayed for each page
-  final List<Widget> _pages = [
-    Center(child: Text('Home Page')),
-    Center(child: Text('Location Page')),
-    Center(child: Text('Account Page')),
-  ];
+  // Define the icons for the left, right, and center buttons
+  IconData _leftIcon = Icons.location_pin;
+  IconData _rightIcon = Icons.person;
+  IconData _centerIcon = Icons.home;
 
-  // Handling tab navigation
-  void _onItemTapped(int index) {
+  // Method to handle swapping of icons and navigate to respective pages
+  void _onItemTapped(String position) {
     setState(() {
-      _selectedIndex = index;
+      if (position == 'left') {
+        // Swap the left icon with the center icon and navigate to Location Page
+        IconData temp = _centerIcon;
+        _centerIcon = _leftIcon;
+        _leftIcon = temp;
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => TrackPage()),
+        );
+      } else if (position == 'right') {
+        // Swap the right icon with the center icon and navigate to Account Page
+        IconData temp = _centerIcon;
+        _centerIcon = _rightIcon;
+        _rightIcon = temp;
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => AccountPage()),
+        );
+      } else {
+        // Navigate to Home Page when center button is pressed
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => HomePage()),
+        );
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Displays the current page
+      backgroundColor: const Color(0xFFF6F6F6),
+      // Your existing body content remains intact here
+      bottomNavigationBar: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          // Bottom Navigation Bar Background
+          Container(
+            height: 60,
+            decoration: BoxDecoration(
+              color: Colors.yellow.shade700,
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(40),
+                topRight: Radius.circular(40),
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // Left Button (dynamically swapping with the center)
+                  IconButton(
+                    icon: Icon(_leftIcon, size: 30, color: Colors.white),
+                    onPressed: () {
+                      _onItemTapped(
+                          'left'); // Swap left and center icons, show Location page
+                    },
+                  ),
 
-      backgroundColor: Color(0xFFF6F6F6),
-      bottomNavigationBar: Container(
-        // color: Colors.yellow,
-        height: 50,
-        decoration: BoxDecoration(
-            color: Colors.yellow.shade700,
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(25), topRight: Radius.circular(25))),
+                  const SizedBox(width: 30), // Space for the elevated button
+
+                  // Right Button (dynamically swapping with the center)
+                  IconButton(
+                    icon: Icon(_rightIcon, size: 30, color: Colors.white),
+                    onPressed: () {
+                      _onItemTapped(
+                          'right'); // Swap right and center icons, show Account page
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
+          // Elevated Center Button
+          Positioned(
+            top: -30, // To elevate the button above the navigation bar
+            left: MediaQuery.of(context).size.width / 2 - 35,
+            child: Container(
+              width: 70,
+              height: 70,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.orange.shade400,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.3),
+                    spreadRadius: 5,
+                    blurRadius: 10,
+                  ),
+                ],
+              ),
+              child: IconButton(
+                icon: Icon(
+                  _centerIcon, // Show the selected icon in the center
+                  size: 40,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  _onItemTapped('center'); // Navigate to Home page
+                },
+              ),
+            ),
+          ),
+        ],
       ),
+
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Column(
+        title: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
@@ -72,7 +164,7 @@ class _SchoolHomePageState extends State<HomePage> {
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                image: DecorationImage(
+                image: const DecorationImage(
                   image: NetworkImage(
                       'https://upload.wikimedia.org/wikipedia/commons/8/82/2009-0617-Ontonagon-school.jpg'), // replace with your image URL
                   fit: BoxFit.cover,
@@ -82,8 +174,8 @@ class _SchoolHomePageState extends State<HomePage> {
             SizedBox(height: 10),
 
             // School name and address
-            Padding(
-                padding: const EdgeInsets.symmetric(horizontal: .0),
+            const Padding(
+                padding: EdgeInsets.symmetric(horizontal: .0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -119,13 +211,13 @@ class _SchoolHomePageState extends State<HomePage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     'Announcements',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   ),
                   TextButton(
                     onPressed: () {},
-                    child: Text(
+                    child: const Text(
                       'see all announcements',
                       style: TextStyle(color: Colors.purpleAccent),
                     ),
@@ -143,7 +235,7 @@ class _SchoolHomePageState extends State<HomePage> {
                       'Attention !!',
                       'Bus services will not be available on 28/10/24 because of driver union’s strike.',
                       Colors.red),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   _buildAnnouncementCard(
                       'Attention!!',
                       'School will be celebrating 5 years of completion of bus services',
@@ -180,11 +272,234 @@ class _SchoolHomePageState extends State<HomePage> {
               padding: const EdgeInsets.all(16.0),
               child: buildTrackLiveButtonContainer(),
             ),
+
+// recents summary
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Recent Trip Summary",
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      buildOverallCard(),
+                      SizedBox(width: 10),
+                      buildAttendanceCard(),
+                    ],
+                  ),
+                  SizedBox(height: 20),
+                  buildTimeCard(),
+                ],
+              ),
+            ),
           ],
         ),
       ),
     );
   }
+
+//recent summary widgets//
+
+  Widget buildOverallCard() {
+    return Expanded(
+      child: Container(
+        height: 200,
+        padding: EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.brown[800],
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 10,
+              spreadRadius: 2,
+              offset: Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Overall",
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+            ),
+            SizedBox(height: 16),
+            Center(
+              child: Column(
+                children: [
+                  CircleAvatar(
+                    radius: 30,
+                    backgroundColor: Colors.yellow,
+                    child: Text(
+                      "09",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    "Stops",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.normal,
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 16),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "• Pick Up Time : 9:00 Am",
+                  style: TextStyle(color: Colors.white, fontSize: 12),
+                ),
+                Text(
+                  "• Drop Off Time : 10:15 Am",
+                  style: TextStyle(color: Colors.white, fontSize: 12),
+                ),
+                Text(
+                  "• Bus Contact : 9064499784",
+                  style: TextStyle(color: Colors.white, fontSize: 12),
+                ),
+                Text(
+                  "• Driver’s Name : Ahmed Shah",
+                  style: TextStyle(color: Colors.white, fontSize: 12),
+                ),
+              ],
+            ),
+            Spacer(),
+            TextButton(
+              onPressed: () {},
+              style: TextButton.styleFrom(
+                backgroundColor: Colors.yellow,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              child: Text(
+                "Lost & Found",
+                style: TextStyle(color: Colors.black),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildAttendanceCard() {
+    return Expanded(
+      child: Container(
+        height: 200,
+        padding: EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.brown[800],
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 10,
+              spreadRadius: 2,
+              offset: Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "Date & Attendance",
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+            ),
+            SizedBox(height: 20),
+            Text(
+              "20/10/24",
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 30,
+              ),
+            ),
+            SizedBox(height: 10),
+            Text(
+              "Attendance : 35/50",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 14,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildTimeCard() {
+    return Container(
+      height: 100,
+      padding: EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.brown[800],
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            blurRadius: 10,
+            spreadRadius: 2,
+            offset: Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            "Total Time Taken",
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            ),
+          ),
+          SizedBox(height: 10),
+          Text(
+            "1 Hr : 10 Mins",
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 30,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+//recent summary widgets//
 
   //methods for different cards student bus etc
 
@@ -203,7 +518,7 @@ class _SchoolHomePageState extends State<HomePage> {
           )
         ],
         image: DecorationImage(
-            image: AssetImage("images/bgg1.png"), fit: BoxFit.cover),
+            image: AssetImage("assets/images/bgg1.png"), fit: BoxFit.cover),
         borderRadius: BorderRadius.circular(15),
       ),
       child: Column(
@@ -215,7 +530,7 @@ class _SchoolHomePageState extends State<HomePage> {
                 backgroundColor: Colors.white,
                 radius: 40,
                 backgroundImage: AssetImage(
-                    'images/stuimage.png'), // Placeholder for profile image
+                    'assets/images/stuimage.png'), // Placeholder for profile image
               ),
               SizedBox(width: 26),
               Column(
@@ -263,7 +578,7 @@ class _SchoolHomePageState extends State<HomePage> {
                 width: 100,
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage("images/img1.png"),
+                        image: AssetImage("assets/images/img1.png"),
                         fit: BoxFit.fill)),
               ),
               SizedBox(width: 8),
@@ -314,14 +629,6 @@ class _SchoolHomePageState extends State<HomePage> {
     );
   }
 
-
-
-
-
-
-
-
-
   // 2. Bus Information Container
   Widget buildBusInfoContainer() {
     return Container(
@@ -337,7 +644,7 @@ class _SchoolHomePageState extends State<HomePage> {
             )
           ],
           image: DecorationImage(
-              image: AssetImage("images/bggg2.png"), fit: BoxFit.cover),
+              image: AssetImage("assets/images/bggg2.png"), fit: BoxFit.cover),
           borderRadius: BorderRadius.circular(15),
         ),
         child: Row(children: [
@@ -347,14 +654,12 @@ class _SchoolHomePageState extends State<HomePage> {
             padding: EdgeInsets.only(left: 13, right: 16, bottom: 10, top: 9),
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage("images/bus1.png"),
+                  image: AssetImage("assets/images/bus1.png"),
                   fit: BoxFit.fill),
               borderRadius: BorderRadius.circular(50),
             ),
           ),
           SizedBox(width: 8),
-
-
           const Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -383,13 +688,8 @@ class _SchoolHomePageState extends State<HomePage> {
                     ])),
                   ],
                 ),
-
               ),
-
-
               SizedBox(height: 10),
-
-
               Row(
                 children: [
                   Column(
@@ -414,9 +714,7 @@ class _SchoolHomePageState extends State<HomePage> {
                       ])),
                     ],
                   ),
-
                   SizedBox(width: 15),
-
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -438,7 +736,6 @@ class _SchoolHomePageState extends State<HomePage> {
                             style: TextStyle(fontWeight: FontWeight.normal))
                       ])),
                     ],
-
                   ),
                 ],
               )
@@ -446,25 +743,6 @@ class _SchoolHomePageState extends State<HomePage> {
           )
         ]));
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   // 3. Route Progress Container
   Widget buildRouteProgressContainer() {

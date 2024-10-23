@@ -75,7 +75,7 @@ class LoginPage extends StatelessWidget {
                     SizedBox(height: 40),
                     Center(
                       child: Image.asset(
-                        'images/bus.png', // Image of the school bus (Ensure the image is in assets folder)
+                        'assets/images/bus.png', // Image of the school bus (Ensure the image is in assets folder)
                         height: 150,
                       ),
                     ),
