@@ -1,7 +1,6 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_database/firebase_database.dart'; // Realtime Database package
 import 'package:untitled/screens/conductorpage.dart';
 import 'package:untitled/screens/homepage.dart';
 import 'package:untitled/screens/loginpage.dart';
@@ -18,9 +17,66 @@ class _SignUpState extends State<SignUp> {
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController childNameController = TextEditingController();
-  TextEditingController routeController = TextEditingController();
   TextEditingController rollNumberController = TextEditingController();
   TextEditingController busNumberPlateController = TextEditingController();
+
+  // Dropdown values for schools and routes
+  String? selectedSchool;
+  String? selectedRoute;
+
+  List<String> schools = [];
+  List<String> routes = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchSchools();
+  }
+
+  @override
+  void dispose() {
+    // Dispose controllers to avoid memory leaks
+    nameController.dispose();
+    phoneController.dispose();
+    childNameController.dispose();
+    rollNumberController.dispose();
+    busNumberPlateController.dispose();
+    super.dispose();
+  }
+
+  // Fetch schools from Realtime Database
+  Future<void> fetchSchools() async {
+    try {
+      DatabaseReference schoolsRef = FirebaseDatabase.instance.ref().child('schools');
+      DataSnapshot snapshot = await schoolsRef.get();
+
+      if (snapshot.exists) {
+        Map<dynamic, dynamic> schoolData = snapshot.value as Map<dynamic, dynamic>;
+        setState(() {
+          schools = schoolData.keys.toList().cast<String>();
+        });
+      }
+    } catch (e) {
+      print('Error fetching schools: $e');
+    }
+  }
+
+  // Fetch routes based on the selected school
+  Future<void> fetchRoutes(String selectedSchool) async {
+    try {
+      DatabaseReference routesRef = FirebaseDatabase.instance.ref().child('schools/$selectedSchool/routes');
+      DataSnapshot snapshot = await routesRef.get();
+
+      if (snapshot.exists) {
+        Map<dynamic, dynamic> routeData = snapshot.value as Map<dynamic, dynamic>;
+        setState(() {
+          routes = routeData.keys.toList().cast<String>();
+        });
+      }
+    } catch (e) {
+      print('Error fetching routes: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -164,7 +220,33 @@ class _SignUpState extends State<SignUp> {
                       keyboardType: TextInputType.phone,
                     ),
                     SizedBox(height: 20),
-                    
+
+                    // Dropdown for selecting school
+                    DropdownButtonFormField<String>(
+                      value: selectedSchool,
+                      items: schools.map((String school) {
+                        return DropdownMenuItem<String>(
+                          value: school,
+                          child: Text(school),
+                        );
+                      }).toList(),
+                      onChanged: (value) {
+                        if (value != null) {
+                          setState(() {
+                            selectedSchool = value;
+                            fetchRoutes(value); // Fetch routes based on selected school
+                          });
+                        }
+                      },
+                      decoration: InputDecoration(
+                        labelText: 'Select School',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20),
+
                     // Conditional fields for Parent or School
                     if (isParentSelected) ...[
                       // For Parent: Additional fields
@@ -178,16 +260,32 @@ class _SignUpState extends State<SignUp> {
                         ),
                       ),
                       SizedBox(height: 20),
-                      TextField(
-                        controller: routeController,
+
+                      // Dropdown for selecting route
+                      DropdownButtonFormField<String>(
+                        value: selectedRoute,
+                        items: routes.map((String route) {
+                          return DropdownMenuItem<String>(
+                            value: route,
+                            child: Text(route),
+                          );
+                        }).toList(),
+                        onChanged: (value) {
+                          if (value != null) {
+                            setState(() {
+                              selectedRoute = value;
+                            });
+                          }
+                        },
                         decoration: InputDecoration(
-                          labelText: 'Route',
+                          labelText: 'Select Route',
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                         ),
                       ),
                       SizedBox(height: 20),
+
                       TextField(
                         controller: rollNumberController,
                         decoration: InputDecoration(
@@ -209,29 +307,9 @@ class _SignUpState extends State<SignUp> {
                         ),
                       ),
                     ],
-                    
+
                     SizedBox(height: 20),
-                    // Terms and Conditions checkbox
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: true,
-                          onChanged: (bool? value) {
-                            // Add your checkbox action here
-                          },
-                          activeColor: Colors.yellow,
-                        ),
-                        Text("By creating an account, you agree to our "),
-                        Text(
-                          "Terms and Conditions",
-                          style: TextStyle(
-                            decoration: TextDecoration.underline,
-                            color: Colors.blue,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 20),
+
                     // Sign up button
                     Center(
                       child: ElevatedButton(
@@ -264,27 +342,24 @@ class _SignUpState extends State<SignUp> {
                         ),
                       ),
                     ),
+
                     SizedBox(height: 20),
                     Center(
-                      child: Text.rich(
-                        TextSpan(
+                      child: RichText(
+                        text: TextSpan(
                           text: "Already have an account? ",
-                          style: TextStyle(color: Colors.grey),
-                          children: <TextSpan>[
+                          style: TextStyle(color: Colors.black),
+                          children: [
                             TextSpan(
-                              text: 'Sign In',
-                              style: TextStyle(
-                                color: Colors.purple,
-                                decoration: TextDecoration.underline,
-                              ),
-                              recognizer: TapGestureRecognizer()..onTap = () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => LoginPage(), // Ensure SignUp is defined in signup.dart
-                                  ),
-                                );
-                              },
+                              text: 'Log in',
+                              style: TextStyle(color: Colors.yellow[800], fontWeight: FontWeight.bold),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => LoginPage()),
+                                  );
+                                },
                             ),
                           ],
                         ),

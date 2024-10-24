@@ -1,17 +1,87 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:firebase_auth/firebase_auth.dart';// Import for Firebase Authentication
+import 'package:firebase_database/firebase_database.dart'; // Import for Firebase Database
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'homepage.dart'; // Import the SchoolHomePage component
+import 'homepage.dart'; // Import the Parent HomePage component
+import 'conductorpage.dart'; // Import the Conductor HomePage component
 import 'signuppage.dart'; // Import the SignUp component
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final DatabaseReference dbRef = FirebaseDatabase.instance.ref();
+
+  Future<void> handleLogin() async {
+    String phoneNumber = phoneController.text.trim();
+    String password = passwordController.text.trim();
+
+    try {
+      // Check if the phone number exists under parents
+      DatabaseEvent parentEvent =
+          await dbRef.child('parents').orderByChild('phone').equalTo(phoneNumber).once();
+      DataSnapshot parentSnapshot = parentEvent.snapshot;
+
+      if (parentSnapshot.exists) {
+        // If a parent is found, navigate to the parent homepage
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => HomePage()),
+        );
+        return;
+      }
+
+      // If not a parent, check under conductors
+      DatabaseEvent conductorEvent = await dbRef.child('schools').once();
+      DataSnapshot conductorSnapshot = conductorEvent.snapshot;
+
+      if (conductorSnapshot.exists) {
+        Map<dynamic, dynamic> schools = conductorSnapshot.value as Map<dynamic, dynamic>;
+
+        for (var schoolKey in schools.keys) {
+          var school = schools[schoolKey];
+          if (school['conductors'] != null) {
+            Map<dynamic, dynamic> conductors = school['conductors'];
+
+            for (var conductorKey in conductors.keys) {
+              var conductor = conductors[conductorKey];
+              if (conductor['phone'] == phoneNumber && conductor['password'] == password) {
+                // If the conductor is found and password matches, navigate to the conductor homepage
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ConductorPage()),
+                );
+                return;
+              }
+            }
+          }
+        }
+      }
+
+      // If neither parent nor conductor is found, show an error
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Invalid phone number or password")),
+      );
+    } catch (e) {
+      // Handle any errors
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("An error occurred: $e")),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.yellow, // Set the background color to yellow
       body: SafeArea(
-        child: SingleChildScrollView( // Make the Column scrollable
+        child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -24,7 +94,8 @@ class LoginPage extends StatelessWidget {
                     IconButton(
                       icon: Icon(Icons.arrow_back),
                       onPressed: () {
-                        // Define action on back arrow press
+                        // Define action on back arrow press (optional)
+                        Navigator.pop(context);
                       },
                       color: Colors.black,
                     ),
@@ -81,6 +152,7 @@ class LoginPage extends StatelessWidget {
                     ),
                     SizedBox(height: 20),
                     TextField(
+                      controller: phoneController,
                       decoration: InputDecoration(
                         labelText: 'Phone Number',
                         border: OutlineInputBorder(
@@ -91,6 +163,7 @@ class LoginPage extends StatelessWidget {
                     ),
                     SizedBox(height: 20),
                     TextField(
+                      controller: passwordController,
                       decoration: InputDecoration(
                         labelText: 'Password',
                         border: OutlineInputBorder(
@@ -120,14 +193,8 @@ class LoginPage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20.0),
                           ),
                         ),
-                        onPressed: () 
-                        {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => HomePage(),
-                            ),
-                          );
+                        onPressed: () async {
+                          await handleLogin(); // Call the login handler when button is pressed
                         },
                         child: Text(
                           'Sign in',
@@ -148,15 +215,16 @@ class LoginPage extends StatelessWidget {
                                 color: Colors.purple,
                                 decoration: TextDecoration.underline,
                               ),
-                              recognizer: TapGestureRecognizer()..onTap = () {
-                                // Navigate to Sign Up page
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => SignUp(), // Ensure SignUp is defined in signup.dart
-                                  ),
-                                );
-                              },
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  // Navigate to Sign Up page
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => SignUp(), // Ensure SignUp is defined in signup.dart
+                                    ),
+                                  );
+                                },
                             ),
                           ],
                         ),

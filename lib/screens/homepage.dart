@@ -273,34 +273,34 @@ class _SchoolHomePageState extends State<HomePage> {
               child: buildTrackLiveButtonContainer(),
             ),
 
-// recents summary
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "Recent Trip Summary",
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      buildOverallCard(),
-                      SizedBox(width: 10),
-                      buildAttendanceCard(),
-                    ],
-                  ),
-                  SizedBox(height: 20),
-                  buildTimeCard(),
-                ],
-              ),
-            ),
+// // recents summary
+//             Padding(
+//               padding: const EdgeInsets.all(16.0),
+//               child: Column(
+//                 crossAxisAlignment: CrossAxisAlignment.start,
+//                 children: [
+//                   const Text(
+//                     "Recent Trip Summary",
+//                     style: TextStyle(
+//                       fontSize: 24,
+//                       fontWeight: FontWeight.bold,
+//                       color: Colors.black,
+//                     ),
+//                   ),
+//                   SizedBox(height: 20),
+//                   Row(
+//                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                     children: [
+//                       buildOverallCard(),
+//                       SizedBox(width: 10),
+//                       buildAttendanceCard(),
+//                     ],
+//                   ),
+//                   SizedBox(height: 20),
+//                   buildTimeCard(),
+//                 ],
+//               ),
+//             ),
           ],
         ),
       ),
@@ -309,195 +309,195 @@ class _SchoolHomePageState extends State<HomePage> {
 
 //recent summary widgets//
 
-  Widget buildOverallCard() {
-    return Expanded(
-      child: Container(
-        height: 200,
-        padding: EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: Colors.brown[800],
-          borderRadius: BorderRadius.circular(16),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.2),
-              blurRadius: 10,
-              spreadRadius: 2,
-              offset: Offset(0, 4),
-            ),
-          ],
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Overall",
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-              ),
-            ),
-            SizedBox(height: 16),
-            Center(
-              child: Column(
-                children: [
-                  CircleAvatar(
-                    radius: 30,
-                    backgroundColor: Colors.yellow,
-                    child: Text(
-                      "09",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 24,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    "Stops",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.normal,
-                      fontSize: 14,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 16),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "• Pick Up Time : 9:00 Am",
-                  style: TextStyle(color: Colors.white, fontSize: 12),
-                ),
-                Text(
-                  "• Drop Off Time : 10:15 Am",
-                  style: TextStyle(color: Colors.white, fontSize: 12),
-                ),
-                Text(
-                  "• Bus Contact : 9064499784",
-                  style: TextStyle(color: Colors.white, fontSize: 12),
-                ),
-                Text(
-                  "• Driver’s Name : Ahmed Shah",
-                  style: TextStyle(color: Colors.white, fontSize: 12),
-                ),
-              ],
-            ),
-            Spacer(),
-            TextButton(
-              onPressed: () {},
-              style: TextButton.styleFrom(
-                backgroundColor: Colors.yellow,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              child: Text(
-                "Lost & Found",
-                style: TextStyle(color: Colors.black),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget buildAttendanceCard() {
-    return Expanded(
-      child: Container(
-        height: 200,
-        padding: EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: Colors.brown[800],
-          borderRadius: BorderRadius.circular(16),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.2),
-              blurRadius: 10,
-              spreadRadius: 2,
-              offset: Offset(0, 4),
-            ),
-          ],
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "Date & Attendance",
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-              ),
-            ),
-            SizedBox(height: 20),
-            Text(
-              "20/10/24",
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 30,
-              ),
-            ),
-            SizedBox(height: 10),
-            Text(
-              "Attendance : 35/50",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 14,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget buildTimeCard() {
-    return Container(
-      height: 100,
-      padding: EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.brown[800],
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2),
-            blurRadius: 10,
-            spreadRadius: 2,
-            offset: Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            "Total Time Taken",
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
-            ),
-          ),
-          SizedBox(height: 10),
-          Text(
-            "1 Hr : 10 Mins",
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 30,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  // Widget buildOverallCard() {
+  //   return Expanded(
+  //     child: Container(
+  //       height: 200,
+  //       padding: EdgeInsets.all(16),
+  //       decoration: BoxDecoration(
+  //         color: Colors.brown[800],
+  //         borderRadius: BorderRadius.circular(16),
+  //         boxShadow: [
+  //           BoxShadow(
+  //             color: Colors.black.withOpacity(0.2),
+  //             blurRadius: 10,
+  //             spreadRadius: 2,
+  //             offset: Offset(0, 4),
+  //           ),
+  //         ],
+  //       ),
+  //       child: Column(
+  //         crossAxisAlignment: CrossAxisAlignment.start,
+  //         children: [
+  //           Text(
+  //             "Overall",
+  //             style: TextStyle(
+  //               color: Colors.white,
+  //               fontWeight: FontWeight.bold,
+  //               fontSize: 18,
+  //             ),
+  //           ),
+  //           SizedBox(height: 16),
+  //           Center(
+  //             child: Column(
+  //               children: [
+  //                 CircleAvatar(
+  //                   radius: 30,
+  //                   backgroundColor: Colors.yellow,
+  //                   child: Text(
+  //                     "09",
+  //                     style: TextStyle(
+  //                       color: Colors.black,
+  //                       fontWeight: FontWeight.bold,
+  //                       fontSize: 24,
+  //                     ),
+  //                   ),
+  //                 ),
+  //                 SizedBox(height: 8),
+  //                 Text(
+  //                   "Stops",
+  //                   style: TextStyle(
+  //                     color: Colors.white,
+  //                     fontWeight: FontWeight.normal,
+  //                     fontSize: 14,
+  //                   ),
+  //                 ),
+  //               ],
+  //             ),
+  //           ),
+  //           SizedBox(height: 16),
+  //           Column(
+  //             crossAxisAlignment: CrossAxisAlignment.start,
+  //             children: [
+  //               Text(
+  //                 "• Pick Up Time : 9:00 Am",
+  //                 style: TextStyle(color: Colors.white, fontSize: 12),
+  //               ),
+  //               Text(
+  //                 "• Drop Off Time : 10:15 Am",
+  //                 style: TextStyle(color: Colors.white, fontSize: 12),
+  //               ),
+  //               Text(
+  //                 "• Bus Contact : 9064499784",
+  //                 style: TextStyle(color: Colors.white, fontSize: 12),
+  //               ),
+  //               Text(
+  //                 "• Driver’s Name : Ahmed Shah",
+  //                 style: TextStyle(color: Colors.white, fontSize: 12),
+  //               ),
+  //             ],
+  //           ),
+  //           Spacer(),
+  //           TextButton(
+  //             onPressed: () {},
+  //             style: TextButton.styleFrom(
+  //               backgroundColor: Colors.yellow,
+  //               shape: RoundedRectangleBorder(
+  //                 borderRadius: BorderRadius.circular(10),
+  //               ),
+  //             ),
+  //             child: Text(
+  //               "Lost & Found",
+  //               style: TextStyle(color: Colors.black),
+  //             ),
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
+  //
+  // Widget buildAttendanceCard() {
+  //   return Expanded(
+  //     child: Container(
+  //       height: 200,
+  //       padding: EdgeInsets.all(16),
+  //       decoration: BoxDecoration(
+  //         color: Colors.brown[800],
+  //         borderRadius: BorderRadius.circular(16),
+  //         boxShadow: [
+  //           BoxShadow(
+  //             color: Colors.black.withOpacity(0.2),
+  //             blurRadius: 10,
+  //             spreadRadius: 2,
+  //             offset: Offset(0, 4),
+  //           ),
+  //         ],
+  //       ),
+  //       child: Column(
+  //         mainAxisAlignment: MainAxisAlignment.center,
+  //         children: [
+  //           Text(
+  //             "Date & Attendance",
+  //             style: TextStyle(
+  //               color: Colors.white,
+  //               fontWeight: FontWeight.bold,
+  //               fontSize: 18,
+  //             ),
+  //           ),
+  //           SizedBox(height: 20),
+  //           Text(
+  //             "20/10/24",
+  //             style: TextStyle(
+  //               color: Colors.white,
+  //               fontWeight: FontWeight.bold,
+  //               fontSize: 30,
+  //             ),
+  //           ),
+  //           SizedBox(height: 10),
+  //           Text(
+  //             "Attendance : 35/50",
+  //             style: TextStyle(
+  //               color: Colors.white,
+  //               fontSize: 14,
+  //             ),
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
+  //
+  // Widget buildTimeCard() {
+  //   return Container(
+  //     height: 100,
+  //     padding: EdgeInsets.all(16),
+  //     decoration: BoxDecoration(
+  //       color: Colors.brown[800],
+  //       borderRadius: BorderRadius.circular(16),
+  //       boxShadow: [
+  //         BoxShadow(
+  //           color: Colors.black.withOpacity(0.2),
+  //           blurRadius: 10,
+  //           spreadRadius: 2,
+  //           offset: Offset(0, 4),
+  //         ),
+  //       ],
+  //     ),
+  //     child: Column(
+  //       crossAxisAlignment: CrossAxisAlignment.center,
+  //       children: [
+  //         Text(
+  //           "Total Time Taken",
+  //           style: TextStyle(
+  //             color: Colors.white,
+  //             fontWeight: FontWeight.bold,
+  //             fontSize: 18,
+  //           ),
+  //         ),
+  //         SizedBox(height: 10),
+  //         Text(
+  //           "1 Hr : 10 Mins",
+  //           style: TextStyle(
+  //             color: Colors.white,
+  //             fontWeight: FontWeight.bold,
+  //             fontSize: 30,
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
 //recent summary widgets//
 
@@ -783,7 +783,12 @@ class _SchoolHomePageState extends State<HomePage> {
     return Container(
       height: 50,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => TrackPage()),
+          );
+        },
         style: ElevatedButton.styleFrom(
           backgroundColor: Color(0xFFf0a500),
           shape:

@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "175526186298",
+    "firebase_url": "https://school-bus-tracker-skoolyatra-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "school-bus-tracker-skoolyatra",
+    "storage_bucket": "school-bus-tracker-skoolyatra.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:175526186298:android:5980446f66d80c78dc9403",
+        "android_client_info": {
+          "package_name": "com.ridhwanvs.schoolbustracker"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1v8H8RbJq98E-T4Q8kE49BzALMtyKawY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
