@@ -265,13 +265,15 @@ class _SchoolHomePageState extends State<HomePage> {
               padding: const EdgeInsets.all(16.0),
               child: buildRouteProgressContainer(),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 1),
 
             // 4. Track Live Button Container
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: buildTrackLiveButtonContainer(),
             ),
+
+            SizedBox(height: 30),
 
 // // recents summary
 //             Padding(
@@ -307,201 +309,6 @@ class _SchoolHomePageState extends State<HomePage> {
     );
   }
 
-//recent summary widgets//
-
-  // Widget buildOverallCard() {
-  //   return Expanded(
-  //     child: Container(
-  //       height: 200,
-  //       padding: EdgeInsets.all(16),
-  //       decoration: BoxDecoration(
-  //         color: Colors.brown[800],
-  //         borderRadius: BorderRadius.circular(16),
-  //         boxShadow: [
-  //           BoxShadow(
-  //             color: Colors.black.withOpacity(0.2),
-  //             blurRadius: 10,
-  //             spreadRadius: 2,
-  //             offset: Offset(0, 4),
-  //           ),
-  //         ],
-  //       ),
-  //       child: Column(
-  //         crossAxisAlignment: CrossAxisAlignment.start,
-  //         children: [
-  //           Text(
-  //             "Overall",
-  //             style: TextStyle(
-  //               color: Colors.white,
-  //               fontWeight: FontWeight.bold,
-  //               fontSize: 18,
-  //             ),
-  //           ),
-  //           SizedBox(height: 16),
-  //           Center(
-  //             child: Column(
-  //               children: [
-  //                 CircleAvatar(
-  //                   radius: 30,
-  //                   backgroundColor: Colors.yellow,
-  //                   child: Text(
-  //                     "09",
-  //                     style: TextStyle(
-  //                       color: Colors.black,
-  //                       fontWeight: FontWeight.bold,
-  //                       fontSize: 24,
-  //                     ),
-  //                   ),
-  //                 ),
-  //                 SizedBox(height: 8),
-  //                 Text(
-  //                   "Stops",
-  //                   style: TextStyle(
-  //                     color: Colors.white,
-  //                     fontWeight: FontWeight.normal,
-  //                     fontSize: 14,
-  //                   ),
-  //                 ),
-  //               ],
-  //             ),
-  //           ),
-  //           SizedBox(height: 16),
-  //           Column(
-  //             crossAxisAlignment: CrossAxisAlignment.start,
-  //             children: [
-  //               Text(
-  //                 "• Pick Up Time : 9:00 Am",
-  //                 style: TextStyle(color: Colors.white, fontSize: 12),
-  //               ),
-  //               Text(
-  //                 "• Drop Off Time : 10:15 Am",
-  //                 style: TextStyle(color: Colors.white, fontSize: 12),
-  //               ),
-  //               Text(
-  //                 "• Bus Contact : 9064499784",
-  //                 style: TextStyle(color: Colors.white, fontSize: 12),
-  //               ),
-  //               Text(
-  //                 "• Driver’s Name : Ahmed Shah",
-  //                 style: TextStyle(color: Colors.white, fontSize: 12),
-  //               ),
-  //             ],
-  //           ),
-  //           Spacer(),
-  //           TextButton(
-  //             onPressed: () {},
-  //             style: TextButton.styleFrom(
-  //               backgroundColor: Colors.yellow,
-  //               shape: RoundedRectangleBorder(
-  //                 borderRadius: BorderRadius.circular(10),
-  //               ),
-  //             ),
-  //             child: Text(
-  //               "Lost & Found",
-  //               style: TextStyle(color: Colors.black),
-  //             ),
-  //           ),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
-  //
-  // Widget buildAttendanceCard() {
-  //   return Expanded(
-  //     child: Container(
-  //       height: 200,
-  //       padding: EdgeInsets.all(16),
-  //       decoration: BoxDecoration(
-  //         color: Colors.brown[800],
-  //         borderRadius: BorderRadius.circular(16),
-  //         boxShadow: [
-  //           BoxShadow(
-  //             color: Colors.black.withOpacity(0.2),
-  //             blurRadius: 10,
-  //             spreadRadius: 2,
-  //             offset: Offset(0, 4),
-  //           ),
-  //         ],
-  //       ),
-  //       child: Column(
-  //         mainAxisAlignment: MainAxisAlignment.center,
-  //         children: [
-  //           Text(
-  //             "Date & Attendance",
-  //             style: TextStyle(
-  //               color: Colors.white,
-  //               fontWeight: FontWeight.bold,
-  //               fontSize: 18,
-  //             ),
-  //           ),
-  //           SizedBox(height: 20),
-  //           Text(
-  //             "20/10/24",
-  //             style: TextStyle(
-  //               color: Colors.white,
-  //               fontWeight: FontWeight.bold,
-  //               fontSize: 30,
-  //             ),
-  //           ),
-  //           SizedBox(height: 10),
-  //           Text(
-  //             "Attendance : 35/50",
-  //             style: TextStyle(
-  //               color: Colors.white,
-  //               fontSize: 14,
-  //             ),
-  //           ),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
-  //
-  // Widget buildTimeCard() {
-  //   return Container(
-  //     height: 100,
-  //     padding: EdgeInsets.all(16),
-  //     decoration: BoxDecoration(
-  //       color: Colors.brown[800],
-  //       borderRadius: BorderRadius.circular(16),
-  //       boxShadow: [
-  //         BoxShadow(
-  //           color: Colors.black.withOpacity(0.2),
-  //           blurRadius: 10,
-  //           spreadRadius: 2,
-  //           offset: Offset(0, 4),
-  //         ),
-  //       ],
-  //     ),
-  //     child: Column(
-  //       crossAxisAlignment: CrossAxisAlignment.center,
-  //       children: [
-  //         Text(
-  //           "Total Time Taken",
-  //           style: TextStyle(
-  //             color: Colors.white,
-  //             fontWeight: FontWeight.bold,
-  //             fontSize: 18,
-  //           ),
-  //         ),
-  //         SizedBox(height: 10),
-  //         Text(
-  //           "1 Hr : 10 Mins",
-  //           style: TextStyle(
-  //             color: Colors.white,
-  //             fontWeight: FontWeight.bold,
-  //             fontSize: 30,
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
-//recent summary widgets//
-
-  //methods for different cards student bus etc
 
   // 1. Profile Container
   Widget buildProfileContainer() {
@@ -750,18 +557,18 @@ class _SchoolHomePageState extends State<HomePage> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          'Route Progress',
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          'Bus Route',
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
         ),
-        SizedBox(height: 10),
+        SizedBox(height: 22),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            buildRouteStop(Icons.location_on, 'A', Colors.green),
-            buildRouteStop(Icons.location_on, 'B', Colors.yellow),
-            buildRouteStop(Icons.location_on, 'C', Colors.red),
-            buildRouteStop(Icons.location_on, 'D', Colors.grey),
-            buildRouteStop(Icons.location_on, 'E', Colors.grey),
+            buildRouteStop(Icons.location_on, 'kidiyoor', Colors.green),
+            buildRouteStop(Icons.location_on, 'Seetha nilaya', Colors.yellow),
+            buildRouteStop(Icons.location_on, 'Kunjagude', Colors.red),
+            buildRouteStop(Icons.location_on, 'MIS', Colors.grey),
+
           ],
         ),
       ],

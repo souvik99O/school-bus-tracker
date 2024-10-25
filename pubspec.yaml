@@ -17,6 +17,12 @@ dependencies:
   firebase_core: ^2.14.0
   firebase_auth: ^4.16.0
   firebase_database: ^10.5.7
+  google_maps_flutter: ^2.9.0
+  dio: ^5.0.0
+  flutter_svg: ^1.0.0
+  flutter_polyline_points: ^1.0.0
+  location: ^5.0.3
+  intl: ^0.18.0
 
 dev_dependencies:
   flutter_test:
